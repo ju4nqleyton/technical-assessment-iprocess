@@ -1,25 +1,19 @@
 import { useSelector } from 'react-redux';
-import Header from './Header';
+import { selectLoanData } from '../redux/selectors';
 import Loan from './Loan';
 import PaymentDividerButton from './PaymentDividerButton';
-import { selectLoanData } from '../redux/selectors';
 
 export default function Payment() {
-  const { initialLoan, currency } = useSelector(selectLoanData);
-
-  const headerData = {
-    buttonText: 'Editar',
-    amount: initialLoan,
-    currency,
-  };
+  const { currency, initialLoan, initialDate, initialPercentage } =
+    useSelector(selectLoanData);
 
   const loanData = {
     status: false,
     title: 'Anticipo',
     amount: initialLoan,
     currency,
-    percentage: '100%',
-    date: '22 Ene, 2022',
+    percentage: `${initialPercentage}%`,
+    date: initialDate,
   };
 
   const paymentDividerButtonData = {
@@ -28,7 +22,6 @@ export default function Payment() {
 
   return (
     <div className="p-4">
-      <Header {...headerData} />
       <section className="grid grid-cols-1 gap-4 md:grid-cols-2">
         <Loan {...loanData} />
         <PaymentDividerButton {...paymentDividerButtonData} />
