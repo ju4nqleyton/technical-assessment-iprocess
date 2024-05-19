@@ -12,6 +12,8 @@ export default function LoanDividerButton() {
       amount: 0,
       percentage: 0,
       date: null,
+      edit: false,
+      paid: false,
     };
 
     dispatch(addPayment(payment));
@@ -20,7 +22,7 @@ export default function LoanDividerButton() {
   return (
     <button
       onClick={handleAddPayment}
-      className="flex h-12 w-12 items-center justify-center rounded-full bg-orange-700 text-white hover:bg-orange-600"
+      className="flex h-12 w-12 items-center justify-center rounded-full bg-orange-500 text-white hover:bg-orange-600"
     >
       +
     </button>

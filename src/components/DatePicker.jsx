@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { format } from 'date-fns';
 import { DayPicker } from 'react-day-picker';
 import 'react-day-picker/dist/style.css';
@@ -6,16 +6,20 @@ import 'react-day-picker/dist/style.css';
 export default function DatePicker() {
   const [selected, setSelected] = useState();
 
-  let footer = <p>Please pick a day.</p>;
-  if (selected) {
-    footer = <p>{format(selected, 'PP')}.</p>;
-  }
+  useEffect(() => {
+    if (selected) {
+      console.log(format(selected, 'PP'));
+    }
+  }, [selected]);
+
   return (
     <DayPicker
       mode="single"
       selected={selected}
       onSelect={setSelected}
-      footer={footer}
+      modifiersClassNames={{
+        selected: 'bg-orange-500',
+      }}
     />
   );
 }
