@@ -21,7 +21,10 @@ export default function Header() {
           {edit ? 'Guardar' : 'Editar'}
         </button>
         <span className="text-gray-600">
-          Por cobrar {initialLoan} {currency}
+          Por cobrar{' '}
+          <span className="font-bold text-gray-900">
+            {initialLoan} {currency}
+          </span>
         </span>
       </div>
     </header>

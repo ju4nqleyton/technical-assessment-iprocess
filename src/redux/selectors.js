@@ -5,6 +5,7 @@ const selectInitialLoan = (state) => state.initialLoan;
 const selectInitialDate = (state) => state.initialDate;
 const selectInitialPercentage = (state) => state.initialPercentage;
 const selectEdit = (state) => state.edit;
+const selectPayments = (state) => state.payments;
 
 export const selectLoanData = createSelector(
   [
@@ -13,12 +14,14 @@ export const selectLoanData = createSelector(
     selectInitialDate,
     selectInitialPercentage,
     selectEdit,
+    selectPayments,
   ],
-  (currency, initialLoan, initialDate, initialPercentage, edit) => ({
+  (currency, initialLoan, initialDate, initialPercentage, edit, payments) => ({
     currency,
     initialLoan,
     initialDate,
     initialPercentage,
     edit,
+    payments,
   }),
 );

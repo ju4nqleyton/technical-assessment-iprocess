@@ -16,9 +16,11 @@ export default function Home() {
   }, [dispatch]);
 
   return (
-    <>
-      <Header />
-      <Payment />
-    </>
+    <div className="flex h-screen items-start justify-center pt-32">
+      <div className="w-1/2">
+        <Header />
+        <Payment />
+      </div>
+    </div>
   );
 }

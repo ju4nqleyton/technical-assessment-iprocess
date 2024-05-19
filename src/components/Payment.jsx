@@ -1,30 +1,25 @@
 import { useSelector } from 'react-redux';
-import { selectLoanData } from '../redux/selectors';
 import Loan from './Loan';
-import PaymentDividerButton from './PaymentDividerButton';
+import LoanDividerButton from './LoanDividerButton';
+import LoanDividerPayment from './LoanDividerPayment';
 
 export default function Payment() {
-  const { currency, initialLoan, initialDate, initialPercentage } =
-    useSelector(selectLoanData);
-
-  const loanData = {
-    status: false,
-    title: 'Anticipo',
-    amount: initialLoan,
-    currency,
-    percentage: `${initialPercentage}%`,
-    date: initialDate,
-  };
-
-  const paymentDividerButtonData = {
-    text: 'Agregar Pago',
-  };
+  const payments = useSelector((state) => state.payments);
 
   return (
     <div className="p-4">
-      <section className="grid grid-cols-1 gap-4 md:grid-cols-2">
-        <Loan {...loanData} />
-        <PaymentDividerButton {...paymentDividerButtonData} />
+      <section className="flex flex-row gap-4 overflow-x-auto">
+        <div className="flex-shrink-0">
+          <LoanDividerButton />
+        </div>
+        <div className="flex-shrink-0">
+          <Loan />
+        </div>
+        {payments.map((payment, index) => (
+          <div className="flex-shrink-0" key={index}>
+            <LoanDividerPayment payment={payment} />
+          </div>
+        ))}
       </section>
     </div>
   );
