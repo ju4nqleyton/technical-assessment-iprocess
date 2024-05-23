@@ -2,19 +2,26 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Button, Modal } from 'flowbite-react';
-import { format } from 'date-fns';
+import { format, isBefore, startOfDay } from 'date-fns';
 import DatePicker from './DatePicker';
 import { updatePayment } from '../redux/actions';
+
+// Realizo importaciones de funciones de date-fns para poder trabajar con fechas, de ahi la eleccion de la libreria react-day-picker para poder seleccionar una fecha en el calendario.
 
 export function DatePickerModal({ payment }) {
   const dispatch = useDispatch();
   const [openModal, setOpenModal] = useState(false);
 
   const setDate = (date) => {
+    const today = startOfDay(new Date());
+
+    if (isBefore(date, today)) {
+      alert('No puedes seleccionar una fecha anterior a hoy');
+      return;
+    }
     //@todo: api put para actualizar la fecha de un pago
     dispatch(updatePayment({ id: payment.id, payment: { ...payment, date } }));
   };
-
   return (
     <>
       <div

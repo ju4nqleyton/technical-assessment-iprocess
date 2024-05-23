@@ -72,7 +72,9 @@ export const calculateNewPayment = (payments) => {
       .reduce((a, b) => {
         return a + b.percentage;
       }, 0) || 0;
-  const percentage = (100 - totalPaymentsPercentage) / totalPayments;
+  const percentage = parseFloat(
+    ((100 - totalPaymentsPercentage) / totalPayments).toFixed(2),
+  );
 
   newPayment = newPayment.map((payment) => {
     if (payment.isPaid) {
@@ -94,7 +96,9 @@ export const updatePayment = (
   const newPayment = payments.map((payment) => {
     if (payload.id === payment.id) {
       if (payload.payment.isPaid) {
-        paymentAmount = (initialPayment * payment.percentage) / 100;
+        paymentAmount = parseFloat(
+          ((initialPayment * payment.percentage) / 100).toFixed(2),
+        );
       }
       return payload.payment;
     } else {
@@ -103,7 +107,9 @@ export const updatePayment = (
   });
 
   const allPayments = !newPayment.some((payment) => !payment.isPaid);
-  const updatedCurrentPayment = currentPayment - paymentAmount;
+  const updatedCurrentPayment = parseFloat(
+    (currentPayment - paymentAmount).toFixed(2),
+  );
 
   return {
     payments: newPayment,

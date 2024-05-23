@@ -8,6 +8,11 @@ export default function PaymentsHeader() {
   const dispatch = useDispatch();
   const { currency, currentPayment, edit, paid } = useSelector(selectLoanData);
 
+  const formattedCurrentPayment =
+    currentPayment % 1 !== 0
+      ? currentPayment.toFixed(1).replace(/\.0$/, '')
+      : currentPayment;
+
   const handleEdit = () => {
     dispatch(setEdit());
   };
@@ -26,10 +31,7 @@ export default function PaymentsHeader() {
         <span className="text-gray-600">
           Por cobrar{' '}
           <span className="font-bold text-gray-900">
-            {currentPayment % 1 !== 0
-              ? currentPayment.toFixed(1)
-              : currentPayment}{' '}
-            {currency}
+            {formattedCurrentPayment} {currency}
           </span>
         </span>
       </div>
