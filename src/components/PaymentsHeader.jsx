@@ -2,6 +2,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setEdit } from '../redux/actions';
 import { selectLoanData } from '../redux/selectors';
 
+// Cuando establezco la propiedad disabled en true, el botón se deshabilita y no se puede hacer click en él. Esto con el fin de que el usuario no pueda editar los pagos si ya están pagados.
+
 export default function PaymentsHeader() {
   const dispatch = useDispatch();
   const { currency, currentPayment, edit, paid } = useSelector(selectLoanData);

@@ -12,6 +12,9 @@ import {
   updatePayment,
 } from '../utils/helpers';
 
+// Me decido por Redux para poder almacenar todo el estado de la aplicación en un solo lugar, de esta forma puedo acceder a la información desde cualquier componente.
+// Principalmente fue una decision personal, me parecia mas ordenado y escalable.
+
 const initialState = {
   currency: null,
   initialPayment: null,

@@ -1,5 +1,7 @@
 import { format } from 'date-fns';
 
+// La idea en este archivo es poder tener toda la logica separada de los componentes.
+
 export const getCurrency = () => {
   let currency = null;
   while (

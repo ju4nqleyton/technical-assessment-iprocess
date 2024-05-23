@@ -5,6 +5,7 @@ export default function PaymentsAddButton() {
   const dispatch = useDispatch();
 
   const handleAddPayment = () => {
+    //@todo: api post para crear un pago
     dispatch(addPayment({}));
   };
 

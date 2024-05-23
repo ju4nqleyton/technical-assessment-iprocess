@@ -6,6 +6,8 @@ import { selectLoanData } from '../redux/selectors';
 import { DatePickerModal } from './DatePickerModal';
 import { PaymentsModal } from './PaymentsModal';
 
+// Empiezo a pensar la logica de como tengo que pagar, en este caso decido mostrar el monto a pagar y el porcentaje que representa del total.
+
 export default function PaymentsDetails({ payment }) {
   const { currency, initialPayment, edit } = useSelector(selectLoanData);
   const [showModalPayment, setShowModalPayment] = useState(false);

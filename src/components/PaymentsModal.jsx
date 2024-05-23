@@ -7,6 +7,9 @@ import { HiOutlineExclamationCircle } from 'react-icons/hi';
 import { selectLoanData } from '../redux/selectors';
 import { updatePayment } from '../redux/actions';
 
+// Insertar un modal me parece la opcion mas viable para que el usuario sepa que esta en una ventana que permite hacer un pago.
+// Aqui tambien establezco si es posible hacer un pago o no, si el pago anterior no ha sido pagado, no se puede hacer un pago. Y para esto nuevamente uso el recurso del disabled, con el fin de que el usuario no pueda hacer click en el botón cuando no se pueda hacer un pago.
+
 export function PaymentsModal({ payment }) {
   const dispatch = useDispatch();
   const { payments } = useSelector(selectLoanData);
@@ -14,6 +17,7 @@ export function PaymentsModal({ payment }) {
   const [selectedOption, setSelectedOption] = useState('efectivo');
 
   const payPayment = () => {
+    //@todo: api put para hacer un pago
     dispatch(
       updatePayment({
         id: payment.id,

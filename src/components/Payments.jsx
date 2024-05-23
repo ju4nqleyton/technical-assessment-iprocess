@@ -3,6 +3,9 @@ import PaymentsAddButton from './PaymentsAddButton';
 import PaymentsDetails from './PaymentsDetails';
 import { selectLoanData } from '../redux/selectors';
 
+// Aqui ya empiezo a utilizar el hook useSelector para obtener el estado global de la aplicación y poder mostrar los pagos.
+// Redux me da la facilidad de tener todo el estado de la aplicación en un solo lugar y de esta forma logro pensar la logica para desarrollar este componente.
+
 export default function Payments() {
   const { paid, payments } = useSelector(selectLoanData);
 

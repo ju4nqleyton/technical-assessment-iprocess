@@ -11,6 +11,7 @@ export function DatePickerModal({ payment }) {
   const [openModal, setOpenModal] = useState(false);
 
   const setDate = (date) => {
+    //@todo: api put para actualizar la fecha de un pago
     dispatch(updatePayment({ id: payment.id, payment: { ...payment, date } }));
   };
 
