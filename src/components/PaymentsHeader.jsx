@@ -2,9 +2,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setEdit } from '../redux/actions';
 import { selectLoanData } from '../redux/selectors';
 
-export default function Header() {
+export default function PaymentsHeader() {
   const dispatch = useDispatch();
-  const { currency, initialLoan, edit } = useSelector(selectLoanData);
+  const { currency, currentPayment, edit, paid } = useSelector(selectLoanData);
 
   const handleEdit = () => {
     dispatch(setEdit());
@@ -16,6 +16,7 @@ export default function Header() {
       <div className="flex space-x-4">
         <button
           onClick={() => handleEdit()}
+          disabled={paid}
           className={`rounded px-4 py-2 text-sm  ${edit ? 'bg-slate-200 text-gray-900 hover:bg-orange-500' : 'bg-orange-500  text-white hover:bg-orange-600'}`}
         >
           {edit ? 'Guardar' : 'Editar'}
@@ -23,7 +24,10 @@ export default function Header() {
         <span className="text-gray-600">
           Por cobrar{' '}
           <span className="font-bold text-gray-900">
-            {initialLoan} {currency}
+            {currentPayment % 1 !== 0
+              ? currentPayment.toFixed(1)
+              : currentPayment}{' '}
+            {currency}
           </span>
         </span>
       </div>

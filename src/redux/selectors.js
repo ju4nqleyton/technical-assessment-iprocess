@@ -1,25 +1,40 @@
 import { createSelector } from 'reselect';
 
 const selectCurrency = (state) => state.currency;
-const selectInitialLoan = (state) => state.initialLoan;
-const selectInitialDate = (state) => state.initialDate;
+const selectInitialPayment = (state) => state.initialPayment;
+const selectCurrentPayment = (state) => state.currentPayment;
+const selectDate = (state) => state.date;
 const selectInitialPercentage = (state) => state.initialPercentage;
+const selectPaid = (state) => state.paid;
 const selectEdit = (state) => state.edit;
 const selectPayments = (state) => state.payments;
 
 export const selectLoanData = createSelector(
   [
     selectCurrency,
-    selectInitialLoan,
-    selectInitialDate,
+    selectInitialPayment,
+    selectCurrentPayment,
+    selectDate,
+    selectPaid,
     selectInitialPercentage,
     selectEdit,
     selectPayments,
   ],
-  (currency, initialLoan, initialDate, initialPercentage, edit, payments) => ({
+  (
     currency,
-    initialLoan,
-    initialDate,
+    initialPayment,
+    currentPayment,
+    date,
+    paid,
+    initialPercentage,
+    edit,
+    payments,
+  ) => ({
+    currency,
+    initialPayment,
+    currentPayment,
+    date,
+    paid,
     initialPercentage,
     edit,
     payments,

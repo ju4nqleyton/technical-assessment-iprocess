@@ -1,12 +1,26 @@
-import { SET_INITIAL_VALUE, SET_EDIT, ADD_PAYMENT } from './types';
+import {
+  SET_INITIAL_VALUE,
+  SET_EDIT,
+  ADD_PAYMENT,
+  UPDATE_PAYMENT,
+  IS_PAID,
+} from './types';
+
+import {
+  calculateNewPayment,
+  PAYMENT_ADVANCE,
+  updatePayment,
+} from '../utils/helpers';
 
 const initialState = {
-  currency: '',
-  initialLoan: 0,
-  initialDate: null,
-  initialPercentage: 0,
+  currency: null,
+  initialPayment: null,
+  currentPayment: null,
+  date: null,
+  initialPercentage: null,
+  paid: false,
   edit: false,
-  payments: [],
+  payments: [PAYMENT_ADVANCE],
 };
 
 const reducer = (state = initialState, { type, payload }) => {
@@ -15,8 +29,9 @@ const reducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         currency: payload.currency,
-        initialLoan: payload.initialLoan,
-        initialDate: payload.initialDate,
+        initialPayment: payload.initialPayment,
+        currentPayment: payload.initialPayment,
+        date: payload.date,
         initialPercentage: 100,
       };
     case SET_EDIT:
@@ -27,7 +42,22 @@ const reducer = (state = initialState, { type, payload }) => {
     case ADD_PAYMENT:
       return {
         ...state,
-        payments: [...state.payments, payload],
+        payments: calculateNewPayment(state.payments, payload),
+      };
+    case UPDATE_PAYMENT:
+      return {
+        ...state,
+        ...updatePayment(
+          state.payments,
+          payload,
+          state.currentPayment,
+          state.initialPayment,
+        ),
+      };
+    case IS_PAID:
+      return {
+        ...state,
+        paid: true,
       };
     default:
       return state;

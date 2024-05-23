@@ -1,21 +1,21 @@
+/* eslint-disable react/prop-types */
 import { useEffect, useState } from 'react';
-import { format } from 'date-fns';
 import { DayPicker } from 'react-day-picker';
 import 'react-day-picker/dist/style.css';
 
-export default function DatePicker() {
+export default function DatePicker(props) {
   const [selected, setSelected] = useState();
 
   useEffect(() => {
     if (selected) {
-      console.log(format(selected, 'PP'));
+      props.setDate(selected);
     }
   }, [selected]);
 
   return (
     <DayPicker
       mode="single"
-      selected={selected}
+      selected={props.selected}
       onSelect={setSelected}
       modifiersClassNames={{
         selected: 'bg-orange-500',

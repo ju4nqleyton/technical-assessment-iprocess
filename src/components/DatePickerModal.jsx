@@ -1,23 +1,27 @@
 /* eslint-disable react/prop-types */
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { Button, Modal } from 'flowbite-react';
+import { format } from 'date-fns';
+import DatePicker from './DatePicker';
+import { updatePayment } from '../redux/actions';
 
-export function ModalDatePicker({ children }) {
+export function DatePickerModal({ payment }) {
+  const dispatch = useDispatch();
   const [openModal, setOpenModal] = useState(false);
+
+  const setDate = (date) => {
+    dispatch(updatePayment({ id: payment.id, payment: { ...payment, date } }));
+  };
 
   return (
     <>
-      <Button
-        className="bg-orange-500 enabled:hover:bg-orange-600"
-        style={{
-          border: 'none',
-          outline: 'none',
-          boxShadow: 'none',
-        }}
+      <div
+        className="mt-2 cursor-pointer text-xs text-gray-600"
         onClick={() => setOpenModal(true)}
       >
-        Editar fecha
-      </Button>
+        📅{format(payment.date, 'dd/MM/yyyy')}
+      </div>
       <div className="">
         <Modal
           show={openModal}
@@ -26,7 +30,9 @@ export function ModalDatePicker({ children }) {
           size={'sm'}
         >
           <Modal.Body>
-            <div className="space-y-6">{children}</div>
+            <div className="space-y-6">
+              <DatePicker selected={payment.date} setDate={setDate} />
+            </div>
           </Modal.Body>
           <Modal.Footer>
             <Button
