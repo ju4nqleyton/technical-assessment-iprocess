@@ -48,6 +48,7 @@ export default function PaymentsDetails({ payment }) {
       <input
         type="number"
         value={payment.percentage}
+        readOnly
         onChange={() => {}}
         className="ml-4 mr-4 h-10 w-20 text-center text-gray-900"
       />
